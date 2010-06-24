@@ -7,8 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <SystemConfiguration/SCNetworkConfiguration.h>
+#import <SystemConfiguration/SCPreferences.h>
+#import <SystemConfiguration/SCDynamicStore.h>
 
-@interface Location_IndicatorAppDelegate : NSObject <NSApplicationDelegate> {
+@interface Network_Location_IndicatorAppDelegate : NSObject <NSApplicationDelegate> {
 //    NSWindow *window;
 //	IBOutlet NSMenu *statusMenu;
     NSStatusItem * statusItem;

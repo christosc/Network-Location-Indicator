@@ -7,11 +7,8 @@
 //
 
 #import "Network_Location_IndicatorAppDelegate.h"
-#import <SystemConfiguration/SCNetworkConfiguration.h>
-#import <SystemConfiguration/SCPreferences.h>
-#import <SystemConfiguration/SCDynamicStore.h>
 
-@implementation Location_IndicatorAppDelegate
+@implementation Network_Location_IndicatorAppDelegate
 
 //@synthesize window;
 @synthesize statusItem;
@@ -33,7 +30,7 @@
 
 void updateLocation(SCDynamicStoreRef	store, CFArrayRef changedKeys, void	*info) {
 	NSLog(@"updateLocation is being run!");
-	SCPreferencesRef prefs = SCPreferencesCreate(NULL, CFSTR("Location Indicator"), NULL);
+	SCPreferencesRef prefs = SCPreferencesCreate(NULL, CFSTR("Network Location Indicator"), NULL);
 	SCNetworkSetRef currLoc = SCNetworkSetCopyCurrent(prefs);
 	NSLog(@"info is of class:%@", [(id)info class]);
 	[[(id)info statusItem] setTitle:(NSString *)SCNetworkSetGetName(currLoc)];
@@ -47,14 +44,14 @@ void updateLocation(SCDynamicStoreRef	store, CFArrayRef changedKeys, void	*info)
 //	[self makeMenu];
 	
 	SCDynamicStoreContext context = {0, self, NULL, NULL, NULL};
-	SCDynamicStoreRef dynStore = SCDynamicStoreCreate(NULL, CFSTR("Location Indicator"), updateLocation, &context);  
+	SCDynamicStoreRef dynStore = SCDynamicStoreCreate(NULL, CFSTR("Network Location Indicator"), updateLocation, &context);  
 	
 	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength: 37];
 	[statusItem retain];
 	[statusItem setHighlightMode:YES];
 	
 //	[statusItem setMenu:statusMenu];
-	SCPreferencesRef prefs = SCPreferencesCreate(NULL, CFSTR("Location Indicator"), NULL);
+	SCPreferencesRef prefs = SCPreferencesCreate(NULL, CFSTR("Network Location Indicator"), NULL);
 	SCNetworkSetRef currLoc = SCNetworkSetCopyCurrent(prefs);
 	[statusItem setTitle:(NSString *)SCNetworkSetGetName(currLoc)];
 	[statusItem setToolTip:@"Current network location"];
